@@ -2,14 +2,23 @@ import os
 import glob
 from pathlib import Path
 import shutil
+from sys import platform
 
 home = str(Path.home())
 
-FILEPATHS = [
-    os.path.realpath(f'{home}/AppData/Roaming/discord/Cache'),
-    os.path.realpath(f'{home}/AppData/Roaming/discordcanary/Cache'),
-    os.path.realpath(f'{home}/AppData/Roaming/discordptb/Cache')
-]
+if "win" in platform():
+    FILEPATHS = [
+        os.path.realpath(f'{home}/AppData/Roaming/discord/Cache'),
+        os.path.realpath(f'{home}/AppData/Roaming/discordcanary/Cache'),
+        os.path.realpath(f'{home}/AppData/Roaming/discordptb/Cache')
+    ]
+
+elif "linux" in platform():
+    FILEPATHS = [
+        os.path.realpath(f'{home}/.config/discord/Cache'),
+        os.path.realpath(f'{home}/.config/discordcanary/Cache'),
+        os.path.realpath(f'{home}/.config/discordptb/Cache')
+    ]
 
 EXISTINGFILEPATHS = []
 
