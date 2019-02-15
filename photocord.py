@@ -41,6 +41,7 @@ def grabArchives(lol):
     mov = []
     riff = []
     gif = []
+    mpeg = []
 
     for i in range(len(EXISTINGFILEPATHS)):
         for x in glob.glob(EXISTINGFILEPATHS[i] + "/*"):
@@ -59,6 +60,8 @@ def grabArchives(lol):
                     riff.append(x)
                 elif mag.from_file(x) == 'image/gif':
                     gif.append(x)
+                elif mag.from_file(x) == 'audio/mpeg':
+                    mpeg.append(x)
                 else:
                     pass
 
@@ -89,6 +92,10 @@ def grabArchives(lol):
 
     for i in gif:
         out = i + ".gif"
+        shutil.copyfile(i, out)
+    
+    for i in mpeg:
+        out = i + ".mpeg"
         shutil.copyfile(i, out)
     
     if lol == True:
