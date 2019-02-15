@@ -28,6 +28,10 @@ Run `python3 photocord.py` from the directory of photocord. It will create a dir
 
 # Changelog
 
+#### Update 2:
+
+- Sorts through more filetypes (.mov, .gif, .gz (these are usually .js files inside), .mpeg, .jpeg, .png)
+
 #### Update 1:
 
 - Added libmagic functionality to only convert .pngs.
