@@ -25,3 +25,17 @@ Run `python3 photocord.py` from the directory of photocord. It will create a dir
 1.tar.bz2 = Discord Canary
 
 2.tar.bz2 = Discord PTB
+
+# Changelog
+
+#### Update 1:
+
+- Added libmagic functionality to only convert .pngs.
+
+#### Hotfix 2:
+
+- Fixed bug with numbers in menu.
+
+#### Hotfix 1:
+
+- Added options to delete or save cache.
