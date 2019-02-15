@@ -13,7 +13,7 @@ Discord is an Electron app which means it caches your images in its local storag
 
 Photocord uses the libmagic library to read what type of file it is before conversion so you aren't just naming every file a png and having some be corrupted.
 
-***Make sure you have all instances of Discord closed in the background not just the window.***8
+***Make sure you have all instances of Discord closed in the background not just the window.***
 
 # Usage
 Run `python3 photocord.py` from the directory of photocord. It will create a directory in that one named "archives". In this folder will be up to 3 archives with all the cached images saved in the `.tar.bz2` archive format.
