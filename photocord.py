@@ -3,6 +3,8 @@ import glob
 from pathlib import Path
 import shutil
 from sys import platform
+import gzip
+
 
 
 home = str(Path.home())
@@ -33,19 +35,61 @@ def grabArchives(lol):
             EXISTINGFILEPATHS.append(FILEPATHS[i])
 
     pictures = []
+    jpeg = []
+    webm = []
+    gzips = []
+    mov = []
+    riff = []
+    gif = []
 
     for i in range(len(EXISTINGFILEPATHS)):
         for x in glob.glob(EXISTINGFILEPATHS[i] + "/*"):
-            if ".png" not in x:
+            if "data" not in x and "index" not in x:
                 if mag.from_file(x) == 'image/png': 
                     pictures.append(x)
-    print(f"Found {int(len(pictures))} Cached Images")
+                elif mag.from_file(x) == 'image/jpeg':
+                    jpeg.append(x)
+                elif mag.from_file(x) == 'video/webm':
+                    webm.append(x)
+                elif mag.from_file(x) == 'application/x-gzip':
+                    gzips.append(x)
+                elif mag.from_file(x) == 'video/quicktime':
+                    mov.append(x)
+                elif mag.from_file(x) == 'image/webp':
+                    riff.append(x)
+                elif mag.from_file(x) == 'image/gif':
+                    gif.append(x)
+                else:
+                    pass
+
+    print(f"Found {int(len(pictures))} Cached Files For Conversion")
 
     for i in pictures:
-        if ".png" not in i and "data" not in i and "index" not in i:
-            out = i + ".png"
-            os.rename(i, out)
+        out = i + ".png"
+        shutil.copyfile(i, out)
+    
+    for i in jpeg:
+        out = i + ".jpeg"
+        shutil.copyfile(i, out)
+    
+    for i in webm:
+        out = i + ".webm"
+        shutil.copyfile(i, out)
 
+    for i in gzips:
+        out = i + ".gz"
+        shutil.copyfile(i, out)
+    for i in mov:
+        out = i + ".mov"
+        shutil.copyfile(i, out)
+
+    for i in riff:
+        out = i + ".webp"
+        shutil.copyfile(i, out)
+
+    for i in gif:
+        out = i + ".gif"
+        shutil.copyfile(i, out)
     
     if lol == True:
         for f in range(len(EXISTINGFILEPATHS)):
@@ -55,7 +99,7 @@ def grabArchives(lol):
             print(f'Deleting Files From Archive: {EXISTINGFILEPATHS[f]}')
             test = os.listdir(EXISTINGFILEPATHS[f])
             for item in test:
-                if item.endswith(".png"):
+                if "data" not in item or "index" not in item:
                     os.remove(os.path.join(EXISTINGFILEPATHS[f], item))
             print('Finished Deleting Cache')
     elif lol == False:
@@ -89,7 +133,7 @@ def main():
     msg = """
 What would you like to do?
 
-1. Archive All Cached Photos
+1. Archive All Cached Files
 
 2. Archive And Delete All Cache
 
